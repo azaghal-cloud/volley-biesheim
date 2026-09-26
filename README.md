@@ -13,7 +13,8 @@ Site vitrine du club de volley-ball de Biesheim, hébergé gratuitement sur **Gi
 | `club.html` | Le club : comité directeur, encadrement, arbitre, partenaires |
 | `equipes.html` | Équipes : coachs, horaires, galerie photos |
 | `contact.html` | Inscriptions : cotisations 2025-2026, documents, contact |
-| `photos/` | Dossier des photos des équipes (format .jpeg, noms sans accents) |
+| `photos/` | Galerie photos du club — une photo déposée = affichée automatiquement sur la page Photos |
+| `ressources/` | Charte graphique du site : logo.png, bandeau.png |
 | `.github/workflows/deploy.yml` | Publication automatique — ne pas modifier |
 
 ## Modifier le contenu (pour le comité)
@@ -41,5 +42,6 @@ que le site reste rapide sur mobile.
 Le fichier `CNAME` a été retiré temporairement durant le développement.
 Quand le site sera finalisé :
 1. Chez azote.org (asso.st) : enregistrement CNAME vers `azaghal-cloud.github.io` (déjà configuré)
-2. Re-créer le fichier `CNAME` à la racine avec le contenu `volley-biesheim.asso.st`
+2. Re-créer 
+le fichier `CNAME` à la racine avec le contenu `volley-biesheim.asso.st`
 3. Settings → Pages → Custom domain = `volley-biesheim.asso.st`
