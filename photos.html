@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Galerie photos du Volley Biesheim : matchs, tournois, entraînements et événements du club." />
 <title>Photos — Volley Biesheim</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23003366'/%3E%3Cpath d='M6 8 L16 26 L26 8' stroke='white' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="icon" href="ressources/logo.png" />
 <style>
 :root { font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:#0f172a; background:#fff; margin:0; }
 * { box-sizing:border-box; }
@@ -13,14 +13,15 @@ a { color:#0066CC; }
 .top { background:#003366; color:#fff; padding:12px 16px; position:sticky; top:0; z-index:10; box-shadow:0 2px 10px rgba(0,51,102,.35); }
 .top-inner { display:flex; align-items:center; justify-content:space-between; gap:10px; max-width:1100px; margin:0 auto; }
 .brand { display:flex; align-items:center; gap:9px; font-weight:800; text-decoration:none; color:#fff; white-space:nowrap; }
-.ball { width:26px; height:16px; }
+.ball { height:34px; width:auto; }
 .top nav { display:none; gap:18px; font-size:14px; font-weight:600; }
 .top nav a { color:#cbd5e1; text-decoration:none; padding-bottom:3px; }
 .top nav a.on { color:#fff; border-bottom:2px solid #f59e0b; }
 .fb-btn { background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.35); color:#fff; padding:6px 12px; border-radius:999px; font-size:12px; font-weight:600; text-decoration:none; white-space:nowrap; }
 .hero { background:#003366; position:relative; color:#fff; padding:0 18px 26px; overflow:hidden; }
 .hero::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 85% 10%, rgba(255,255,255,.07) 0 40px, transparent 41px), repeating-radial-gradient(circle at 50% 120%, transparent 0 38px, rgba(255,255,255,.04) 38px 40px); }
-.hero > * { position:relative; max-width:1100px; margin:0 auto; }
+.hero > * { position:relative; max-width:1100px;
+ margin:0 auto; }
 .bandeau { text-align:center; padding:18px 0 14px; }
 .btitle { font-size:22px; font-weight:900; letter-spacing:3px; margin:0 0 8px; }
 .chevron { width:36px; height:20px; margin:0 auto; display:block; }
@@ -42,7 +43,8 @@ footer { padding:24px 16px 90px; text-align:center; font-size:11px; color:#94a3b
 .gcap span { display:block; font-size:10.5px; color:#64748b; font-weight:500; }
 .ph-empty { grid-column:1/-1; text-align:center; padding:40px 16px; color:#94a3b8; font-size:14px; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:14px; }
 .loading { grid-column:1/-1; text-align:center; padding:40px 16px; color:#94a3b8; font-size:14px; }
-#lightbox { position:fixed; inset:0; background:rgba(15,23,42,.92); display:none; align-items:center; justify-content:center; z-index:50; flex-direction:column; padding:20px; }
+#lightbox { position:fixed; inset:0; background:rgba(15,23,42,.92); display:none; align-items:center; justify-content:center; 
+z-index:50; flex-direction:column; padding:20px; }
 #lightbox.open { display:flex; }
 #lightbox img { max-width:100%; max-height:85vh; border-radius:10px; }
 #lightbox .lb-cap { color:#fff; font-size:14px; font-weight:700; margin-top:12px; }
@@ -61,7 +63,7 @@ section { padding:26px 32px 6px; } h2 { font-size:18px; } .tabbar { display:none
 <header class="top">
   <div class="top-inner">
     <a class="brand" href="index.html">
-      <svg class="ball" viewBox="0 0 36 20"><path d="M2 2 L18 18 L34 2" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+      <img class="ball" src="ressources/logo.png" alt="Logo Volley Biesheim">
       Volley Biesheim
     </a>
     <nav>
@@ -81,7 +83,8 @@ section { padding:26px 32px 6px; } h2 { font-size:18px; } .tabbar { display:none
 </div>
 
 <section>
-  <h2><span class="dot"></span>Toute la saison en photos</h2>
+  <h2><sp
+an class="dot"></span>Toute la saison en photos</h2>
   <div class="gal" id="galerie">
     <div class="loading">Chargement des photos…</div>
   </div>
@@ -126,7 +129,8 @@ function afficher(data) {
     return;
   }
   photos.sort(function(a, b) { return b.name.localeCompare(a.name); });
-  galerie.innerHTML = photos.map(function(f) {
+  galerie.innerHTML = photos.map(
+function(f) {
     var lib = libelle(f.name);
     var d = datePhoto(f.name);
     return '<a class="gitem" href="' + f.download_url + '" target="_blank" rel="noopener" data-img="' + f.download_url + '" data-lib="' + lib + '" data-date="' + (d || '') + '">' +
