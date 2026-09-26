@@ -10,8 +10,8 @@ Site vitrine du club de volley-ball de Biesheim, hébergé gratuitement sur **Gi
 | Fichier | Page |
 |---|---|
 | `index.html` | Accueil : bandeau, actus, aperçu équipes, matchs, contact |
-| `club.html` | Le club : comité directeur, encadrement, arbitre, partenaires |
-| `equipes.html` | Équipes : coachs, horaires, galerie photos |
+| `club.html` | Le club : chiffres clés, équipes & horaires, comité, encadrement, arbitre, partenaires |
+| `photos.html` | Galerie photos auto-alimentée |
 | `contact.html` | Inscriptions : cotisations 2025-2026, documents, contact |
 | `photos/` | Galerie photos du club — une photo déposée = affichée automatiquement sur la page Photos |
 | `ressources/` | Charte graphique du site : logo.png, bandeau.png |
@@ -30,8 +30,8 @@ Depuis un navigateur (même sur téléphone), sans rien installer :
 ## Ajouter des photos des équipes
 
 1. Sur la page du dépôt : **Add file → Upload files**
-2. Glisser les photos dans le dossier `photos/` (noms sans accents ni espaces :
-   `m11-garcons.jpeg`, `m15.jpeg`, `seniores.jpeg`, `m11-debutant-2.jpeg`, etc.)
+2. Glisser les photos dans le dossier `photos/` (noms sans accents ni espaces,
+   idéalement préfixés par la date : `2025-09-01-m11-garcons.jpeg`)
 3. **Commit changes** — les photos apparaissent automatiquement dans la galerie
 
 ⚠️ Pensez à redimensionner les photos avant envoi (max ~1600px de large) pour
@@ -42,6 +42,5 @@ que le site reste rapide sur mobile.
 Le fichier `CNAME` a été retiré temporairement durant le développement.
 Quand le site sera finalisé :
 1. Chez azote.org (asso.st) : enregistrement CNAME vers `azaghal-cloud.github.io` (déjà configuré)
-2. Re-créer 
-le fichier `CNAME` à la racine avec le contenu `volley-biesheim.asso.st`
+2. Re-créer le fichier `CNAME` à la racine avec le contenu `volley-biesheim.asso.st`
 3. Settings → Pages → Custom domain = `volley-biesheim.asso.st`
