@@ -9,11 +9,12 @@ Site vitrine du club de volley-ball de Biesheim, hébergé gratuitement sur **Gi
 
 | Fichier | Page |
 |---|---|
-| `index.html` | Accueil : bandeau, actus, aperçu équipes, matchs, contact |
-| `club.html` | Le club : chiffres clés, équipes & horaires, comité, encadrement, arbitre, partenaires |
+| `index.html` | Accueil : bandeau, actus (auto), aperçu équipes, matchs, contact |
+| `club.html` | Le club : chiffres clés, équipes & horaires, comité, encadrement, partenaires |
 | `photos.html` | Galerie photos auto-alimentée |
 | `contact.html` | Inscriptions : cotisations 2025-2026, documents, contact |
-| `photos/` | Galerie photos du club — une photo déposée = affichée automatiquement sur la page Photos |
+| `actus/` | Actualités du club — un fichier texte déposé = une actu affichée automatiquement sur l'accueil |
+| `photos/` | Photos du club — une photo déposée = affichée automatiquement dans la galerie |
 | `ressources/` | Charte graphique du site : logo.png, bandeau.png |
 | `.github/workflows/deploy.yml` | Publication automatique — ne pas modifier |
 
@@ -22,12 +23,24 @@ Site vitrine du club de volley-ball de Biesheim, hébergé gratuitement sur **Gi
 Depuis un navigateur (même sur téléphone), sans rien installer :
 
 1. Ouvrir https://github.com/azaghal-cloud/volley-biesheim
-2. Cliquer sur le fichier à modifier (ex. `index.html`) → icône ✏️ « Edit this file »
-3. Modifier le texte — les actus sont entre `<article class="nitem">` et `</article>` :
-   pour en ajouter une, copier un bloc existant et changer le texte
-4. **Commit changes** → le site se met à jour tout seul en 1 à 2 minutes
+2. Cliquer sur le fichier à modifier (ex. `club.html`) → icône ✏️ « Edit this file »
+3. Modifier le texte puis **Commit changes** → le site se met à jour tout seul en 1 à 2 minutes
 
-## Ajouter des photos des équipes
+## Publier une actualité 📰
+
+1. **Add file → Create new file**
+2. Nommer le fichier : `AAAA-MM-JJ-titre-de-lactu.txt`
+   - la **date** en premier (ex. `2025-11-15-`), sans accents ni espaces (des tirets à la place)
+   - la **date est optionnelle** : sans date, l'actu s'affiche avec la catégorie en pastille
+   - la page d'accueil affiche les 6 actus les plus récentes
+3. Contenu du fichier :
+   - **1re ligne** : la catégorie/étiquette (ex. `Résultats du week-end`, `École de volley`)
+   - **Ensuite** : le texte de l'actu (une ligne vide = nouveau paragraphe)
+4. **Commit changes** — l'actu apparaît sur l'accueil en 1 à 2 minutes
+
+Exemple : `actus/2025-09-11-reprise-de-la-saison.txt`
+
+## Ajouter des photos 📷
 
 1. Sur la page du dépôt : **Add file → Upload files**
 2. Glisser les photos dans le dossier `photos/` (noms sans accents ni espaces,
