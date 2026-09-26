@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Volley Biesheim — club de volley-ball à Biesheim (Haut-Rhin). Entraînements au Hall des Sports, du Baby-volley aux Séniors." />
+<title>Volley Biesheim — Club de volley-ball</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23003366'/%3E%3Cpath d='M6 8 L16 26 L26 8' stroke='white' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+<style>
+  :root { font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:#0f172a; background:#fff; margin:0; }
+  * { box-sizing:border-box; }
+  a { color:#0066CC; }
+
+  /* Header */
+  .top { background:#003366; color:#fff; padding:12px 16px; position:sticky; top:0; z-index:10; box-shadow:0 2px 10px rgba(0,51,102,.35); }
+  .top-inner { display:flex; align-items:center; justify-content:space-between; gap:10px; max-width:1100px; margin:0 auto; }
+  .brand { display:flex; align-items:center; gap:9px; font-weight:800; text-decoration:none; color:#fff; white-space:nowrap; }
+  .ball { width:26px; height:16px; }
+  .top nav { display:none; gap:22px; font-size:14px; font-weight:600; }
+  .top nav a { color:#cbd5e1; text-decoration:none; padding-bottom:3px; }
+  .top nav a.on { color:#fff; border-bottom:2px solid #f59e0b; }
+  .fb-btn { background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.35); color:#fff; padding:6px 12px; border-radius:999px; font-size:12px; font-weight:600; text-decoration:none; white-space:nowrap; }
+
+  /* Hero */
+  .hero { background:#003366; position:relative; color:#fff; padding:0 18px 26px; overflow:hidden; }
+  .hero::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 85% 10%, rgba(255,255,255,.07) 0 40px, transparent 41px), radial-gradient(circle at 10% 70%, rgba(255,255,255,.05) 0 55px, transparent 56px), repeating-radial-gradient(circle at 50% 120%, transparent 0 38px, rgba(255,255,255,.04) 38px 40px); }
+  .hero > * { position:relative; max-width:1100px; margin:0 auto; }
+  .bandeau { text-align:center; padding:18px 0 14px; }
+  .btitle { font-size:22px; font-weight:900; letter-spacing:3px; margin:0 0 8px; }
+  .chevron { width:36px; height:20px; margin:0 auto; display:block; }
+  .hero h1 { margin:8px 0 8px; font-size:22px; line-height:1.2; }
+  .hero p { margin:0 0 16px; font-size:14px; opacity:.92; line-height:1.55; }
+  .hero-btns { display:flex; gap:10px; }
+  .btn { flex:1; text-align:center; padding:12px 10px; border-radius:12px; font-size:14px; font-weight:700; text-decoration:none; }
+  .btn-primary { background:#f59e0b; color:#003366; box-shadow:0 4px 14px rgba(245,158,11,.4); }
+  .btn-ghost { border:1.5px solid rgba(255,255,255,.6); color:#fff; }
+
+  /* Quick */
+  .quick { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:-13px 14px 0; max-width:1070px; }
+  .qcard { background:#fff; border-radius:14px; padding:12px 8px; text-align:center; box-shadow:0 4px 14px rgba(15,23,42,.10); border:1px solid #e2e8f0; text-decoration:none; }
+  .qcard .ic { font-size:22px; }
+  .qcard b { display:block; font-size:11.5px; margin-top:4px; color:#003366; }
+
+  section { padding:22px 16px 4px; max-width:1100px; margin:0 auto; }
+  h2 { font-size:16px; margin:0 0 12px; color:#003366; display:flex; align-items:center; gap:8px; }
+  h2 .dot { width:8px; height:8px; background:#f59e0b; border-radius:50%; }
+
+  .news { display:flex; flex-direction:column; gap:10px; }
+  .nitem { border:1px solid #e2e8f0; border-radius:14px; padding:12px; display:flex; gap:12px; }
+  .ndate { background:#003366; color:#fff; border-radius:10px; min-width:44px; text-align:center; padding:6px 2px; align-self:flex-start; }
+  .ndate b { display:block; font-size:16px; }
+  .ndate span { font-size:10px; text-transform:uppercase; }
+  .nitem h3 { margin:0 0 4px; font-size:14px; }
+  .nitem time { font-size:11px; color:#94a3b8; }
+  .nitem p { margin:4px 0 0; font-size:13px; color:#475569; line-height:1.5; }
+
+  .teams { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .team { background:#eff6ff; border-radius:12px; padding:10px 12px; font-size:13px; font-weight:700; color:#003366; }
+  .team span { font-size:11px; font-weight:500; color:#64748b; display:block; margin-top:2px; }
+
+  .cal { border:1px solid #e2e8f0; border-radius:14px; overflow:hidden; }
+  .crow { display:flex; justify-content:space-between; gap:8px; padding:11px 14px; font-size:13px; border-bottom:1px solid #f1f5f9; }
+  .crow:last-child { border:none; }
+  .crow.domicile { background:#f0fdf4; }
+  .badge { font-size:10px; font-weight:800; padding:3px 8px; border-radius:999px; }
+  .badge.dom { background:#dcfce7; color:#166534; }
+  .badge.ext { background:#f1f5f9; color:#475569; }
+  .note { font-size:11px; color:#94a3b8; margin:8px 2px 0; }
+
+  .contact { background:#003366; color:#fff; border-radius:14px; padding:16px; }
+  .contact h3 { margin:0 0 8px; font-size:15px; }
+  .contact p { margin:4px 0; font-size:13px; opacity:.92; }
+  .contact a { color:#f59e0b; }
+
+  footer { padding:24px 16px 90px; text-align:center; font-size:11px; color:#94a3b8; max-width:1100px; margin:0 auto; }
+
+  .tabbar { display:flex; border-top:1px solid #e2e8f0; background:#fff; position:fixed; bottom:0; left:0; right:0; box-shadow:0 -4px 14px rgba(15,23,42,.08); }
+  .tab { flex:1; text-align:center; padding:9px 4px 12px; font-size:10.5px; font-weight:600; color:#64748b; text-decoration:none; }
+  .tab .ic { display:block; font-size:18px; margin-bottom:2px; }
+  .tab.active { color:#0066CC; }
+
+  /* Tablette */
+  @media (min-width:640px) {
+    .hero { padding:0 24px 30px; }
+    .hero h1 { font-size:26px; }
+    .btitle { font-size:28px; letter-spacing:5px; }
+    .news { flex-direction:row; flex-wrap:wrap; }
+    .nitem { flex:1 1 45%; flex-direction:column; gap:8px; }
+    .ndate { align-self:flex-start; }
+    .teams { grid-template-columns:repeat(3,1fr); }
+    .quick { margin:-13px 24px 0; gap:12px; }
+  }
+
+  /* PC */
+  @media (min-width:960px) {
+    .top nav { display:flex; }
+    .hero { padding:0 32px 34px; }
+    .btitle { font-size:36px; letter-spacing:7px; padding-top:8px; }
+    .chevron { width:56px; height:30px; }
+    .hero h1 { font-size:30px; margin:12px 0 10px; max-width:60%; }
+    .hero p { max-width:55%; }
+    .hero-btns { max-width:420px; }
+    .quick { margin:-14px 32px 0; gap:14px; }
+    .qcard .ic { font-size:26px; } .qcard b { font-size:12.5px; }
+    section { padding:26px 32px 6px; }
+    h2 { font-size:18px; }
+    .tabbar { display:none; }
+    footer { padding-bottom:30px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="#accueil">
+      <svg class="ball" viewBox="0 0 36 20"><path d="M2 2 L18 18 L34 2" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+      Volley Biesheim
+    </a>
+    <nav>
+      <a class="on" href="#accueil">Accueil</a>
+      <a href="#actus">Actus</a>
+      <a href="#equipes">Équipes</a>
+      <a href="#matchs">Matchs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="fb-btn" href="https://www.facebook.com/VolleyBiesheim" target="_blank" rel="noopener">Suivre sur Facebook</a>
+  </div>
+</header>
+
+<div class="hero" id="accueil">
+  <div class="bandeau">
+    <p class="btitle">VOLLEY BIESHEIM</p>
+    <svg class="chevron" viewBox="0 0 36 20"><path d="M2 2 L18 18 L34 2" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+  </div>
+  <h1>Le volley pour toutes et tous, à Biesheim 🏐</h1>
+  <p>Du Baby-volley aux Séniors, garçons et filles : nos équipes s'entraînent au <strong>Hall des Sports de Biesheim</strong>. Les nouveaux sont toujours bienvenus — première séance d'essai gratuite, en tenue de sport !</p>
+  <div class="hero-btns">
+    <a class="btn btn-primary" href="#contact">Nous rejoindre</a>
+    <a class="btn btn-ghost" href="#equipes">Découvrir les équipes</a>
+  </div>
+</div>
+
+<div class="quick">
+  <a class="qcard" href="#equipes"><div class="ic">🕗</div><b>Horaires &amp; équipes</b></a>
+  <a class="qcard" href="#matchs"><div class="ic">📋</div><b>Matchs &amp; convocations</b></a>
+  <a class="qcard" href="#actus"><div class="ic">📊</div><b>Actus &amp; résultats</b></a>
+</div>
+
+<section id="actus">
+  <h2><span class="dot"></span>Dernières actus</h2>
+  <div class="news">
+    <article class="nitem">
+      <div class="ndate"><b>11</b><span>Sept.</span></div>
+      <div>
+        <h3>Reprise de la saison</h3>
+        <time>Accueil des nouveaux pratiquants</time>
+        <p>Après un long break, on renoue avec notre sport favori ! Les nouveaux pratiquants sont accueillis au Hall des Sports le vendredi à <strong>18h pour les jeunes</strong> et <strong>20h pour les adultes</strong>, en tenue de sport. Les licenciés reprennent avec leurs équipes respectives selon le planning.</p>
+      </div>
+    </article>
+    <article class="nitem">
+      <div class="ndate"><b>—</b><span>Club</span></div>
+      <div>
+        <h3>Victoire des Séniors Filles 3-0 contre Munster</h3>
+        <time>Résultats du week-end</time>
+        <p>Belle victoire de notre équipe féminine qui enchaine les succès, et beaux résultats également pour les M13 et les M17. Bravo les filles, bravo les coachs, et merci à toutes les « petites mains » !</p>
+      </div>
+    </article>
+    <article class="nitem">
+      <div class="ndate"><b>—</b><span>Club</span></div>
+      <div>
+        <h3>Journée de formation M11 à Biesheim</h3>
+        <time>École de volley</time>
+        <p>Nous avons accueilli la journée de formation M11 : tout le monde a pris beaucoup de plaisir aux exercices concoctés par Sabrina et JM. Merci à eux et à tous les participants !</p>
+      </div>
+    </article>
+    <article class="nitem">
+      <div class="ndate"><b>—</b><span>Vie du club</span></div>
+      <div>
+        <h3>Chocolat chaud et manalas</h3>
+        <time>Convivialité</time>
+        <p>Chocolat chaud et manalas pour les enfants, vin chaud pour les parents : les moments conviviaux font aussi partie de la vie du club. Merci à tous ceux qui participent à ces instants !</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="equipes">
+  <h2><span class="dot"></span>Nos équipes</h2>
+  <div class="teams">
+    <div class="team">Séniors Filles<span>Compétition départementale / régionale</span></div>
+    <div class="team">M17 Filles<span>U17 — entraînement jeudi 18h30</span></div>
+    <div class="team">M15 Filles<span>U15 — entraînement mardi 18h30</span></div>
+    <div class="team">M13 Filles<span>U13 — entraînement mercredi 17h30</span></div>
+    <div class="team">M15 / M13 Garçons<span>U15 &amp; U13 — entraînement mardi 18h30</span></div>
+    <div class="team">M11 &amp; Baby<span>École de volley — vendredi 18h</span></div>
+    <div class="team">Loisir<span>Adultes, tous niveaux — vendredi 20h</span></div>
+  </div>
+</section>
+
+<section id="matchs">
+  <h2><span class="dot"></span>Prochains matchs</h2>
+  <div class="cal">
+    <div class="crow domicile"><div><strong>Séniors F</strong> — match à domicile</div><div><span class="badge dom">Domicile</span><br/>Hall des Sports, vendredi 20h00</div></div>
+    <div class="crow domicile"><div><strong>M13 F équipe 2</strong> — match à domicile</div><div><span class="badge dom">Domicile</span><br/>Hall des Sports, dimanche matin</div></div>
+    <div class="crow"><div><strong>M17 &amp; M13</strong> — déplacements</div><div><span class="badge ext">Extérieur</span><br/>Selon calendrier FFVB</div></div>
+  </div>
+  <p class="note">📆 Les dates et horaires précis sont communiqués par les coachs chaque semaine (convocations) et sur notre page Facebook.</p>
+</section>
+
+<section id="contact">
+  <h2><span class="dot"></span>Nous contacter</h2>
+  <div class="contact">
+    <h3>Venez essayer, c'est gratuit !</h3>
+    <p>📍 Hall des Sports de Biesheim</p>
+    <p>📞 <a href="tel:+33641718626">06 41 71 86 26</a></p>
+    <p>👉 Rejoignez-nous au Hall des Sports, ou suivez-nous sur <a href="https://www.facebook.com/VolleyBiesheim" target="_blank" rel="noopener">Facebook</a></p>
+  </div>
+</section>
+
+<footer>
+  Volley Biesheim — club affilié à la FFVB • Hall des Sports de Biesheim (Haut-Rhin)<br/>
+  Suivez-nous sur <a href="https://www.facebook.com/VolleyBiesheim" target="_blank" rel="noopener">Facebook</a>
+</footer>
+
+<nav class="tabbar">
+  <a class="tab active" href="#accueil"><span class="ic">🏠</span>Accueil</a>
+  <a class="tab" href="#equipes"><span class="ic">🏐</span>Équipes</a>
+  <a class="tab" href="#matchs"><span class="ic">🗓️</span>Matchs</a>
+  <a class="tab" href="#actus"><span class="ic">📰</span>Actus</a>
+  <a class="tab" href="#contact"><span class="ic">✉️</span>Contact</a>
+</nav>
+
+</body>
+</html>
