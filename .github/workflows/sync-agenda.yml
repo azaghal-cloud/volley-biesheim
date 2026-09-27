@@ -1,0 +1,42 @@
+name: Synchronisation agenda (ICS frama.space)
+
+on:
+  schedule:
+    - cron: '17 */4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Télécharger l'ICS du calendrier
+        env:
+          FRAMA_USER: ${{ secrets.FRAMA_USER }}
+          FRAMA_PASS: ${{ secrets.FRAMA_PASS }}
+          FRAMA_CAL_URL: ${{ secrets.FRAMA_CAL_URL }}
+        run: |
+          if [ -z "$FRAMA_USER" ] || [ -z "$FRAMA_PASS" ] || [ -z "$FRAMA_CAL_URL" ]; then
+            echo "Secrets FRAMA_USER / FRAMA_PASS / FRAMA_CAL_URL manquants. Voir Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+          curl -f -u "$FRAMA_USER:$FRAMA_PASS" "$FRAMA_CAL_URL" -o agenda.ics.new
+          if [ ! -s agenda.ics.new ]; then echo "ICS vide ou invalide"; exit 1; fi
+          if ! grep -q "BEGIN:VCALENDAR" agenda.ics.new; then echo "Réponse non ICS"; exit 1; fi
+          mv agenda.ics.new agenda.ics
+
+      - name: Commit si changements
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add agenda.ics
+          if git diff --cached --quiet; then
+            echo "Pas de changement d'agenda"
+          else
+            git commit -m "Agenda : synchronisation automatique de l'ICS (frama.space)"
+            git push
+          fi

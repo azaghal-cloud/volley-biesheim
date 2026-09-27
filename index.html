@@ -21,7 +21,8 @@
 .hero::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 85% 10%, rgba(255,255,255,.07) 0 40px, transparent 41px), repeating-radial-gradient(circle at 50% 120%, transparent 0 38px, rgba(255,255,255,.04) 38px 40px); }
 .hero > * { position:relative; max-width:1100px; margin:0 auto; }
 .bandeau { text-align:center; padding:14px 0 10px; }
-.bandeau-img { width:100%; max-width:560px; display:block; margin:0 auto; height:auto; }
+.bandeau-img { width:100%; max-width:560px; dis
+play:block; margin:0 auto; height:auto; }
 .btitle { font-size:22px; font-weight:900; letter-spacing:3px; margin:0 0 8px; }
 .chevron { width:36px; height:20px; margin:0 auto; display:block; }
 .hero h1 { margin:8px 0 8px; font-size:22px; line-height:1.2; }
@@ -47,7 +48,8 @@ h2 .dot { width:8px; height:8px; background:#f59e0b; border-radius:50%; }
 .cal { border:1px solid #e2e8f0; border-radius:14px; overflow:hidden; }
 .crow { display:flex; justify-content:space-between; gap:8px; padding:11px 14px; font-size:13px; border-bottom:1px solid #f1f5f9; }
 .crow:last-child { border:none; }
-.crow.domicile { background:#f0fdf4; }
+.crow.domicile { back
+ground:#f0fdf4; }
 .badge { font-size:10px; font-weight:800; padding:3px 8px; border-radius:999px; }
 .badge.dom { background:#dcfce7; color:#166534; }
 .badge.ext { background:#f1f5f9; color:#475569; }
@@ -73,7 +75,8 @@ table.tarifs td.prix { text-align:right; font-weight:800; color:#003366; white-s
 .pole div { background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:10px 12px; font-size:13px; }
 .pole b { color:#003366; display:block; }
 .pole span { font-size:11px; color:#64748b; }
-@media (min-width:640px) { .hero { padding:0 24px 30px; } .hero h1 { font-size:26px; } .btitle { font-size:28px; letter-spacing:5px; } .news { flex-direction:row; flex-wrap:wrap; } .nitem { flex:1 1 45%; flex-direction:column; gap:8px; } .ndate { align-self:flex-start; } .teams, .pole { grid-template-columns:repeat(3,1fr); } }
+@media (min-width:640px) { .hero { padding:0 24px 30px; } .hero h1 { font-size:26px; } .btitle { font-size:28px
+; letter-spacing:5px; } .news { flex-direction:row; flex-wrap:wrap; } .nitem { flex:1 1 45%; flex-direction:column; gap:8px; } .ndate { align-self:flex-start; } .teams, .pole { grid-template-columns:repeat(3,1fr); } }
 @media (min-width:960px) { .top nav { display:flex; } .hero { padding:0 32px 34px; } .btitle { font-size:36px; letter-spacing:7px; padding-top:8px; } .chevron { width:56px; height:30px; } .hero h1 { font-size:30px; margin:12px 0 10px; max-width:60%; } .hero p { max-width:55%; } .hero-btns { max-width:420px; } section { padding:26px 32px 6px; } h2 { font-size:18px; } .tabbar { display:none; } footer { padding-bottom:30px; } .pole { grid-template-columns:repeat(4,1fr); } }
 </style>
 </head>
@@ -87,6 +90,7 @@ table.tarifs td.prix { text-align:right; font-weight:800; color:#003366; white-s
     <a class="on" href="index.html">Accueil</a>
     <a class="" href="club.html">Le club</a>
     <a class="" href="photos.html">Photos</a>
+    <a class="" href="agenda.html">Agenda</a>
     <a class="" href="contact.html">Inscriptions</a>
   </nav>
     <a class="fb-btn" href="https://www.facebook.com/VolleyBiesheim" target="_blank" rel="noopener">Suivre sur Facebook</a>
@@ -107,7 +111,8 @@ table.tarifs td.prix { text-align:right; font-weight:800; color:#003366; white-s
 <section id="actus">
   <h2><span class="dot"></span>Dernières actus</h2>
   <div class="news" id="news-list">
-    <div class="nitem"><div class="ndate"><b>—</b><span>Club</span></div><div><h3>Chargement des actus…</h3></div></div>
+    <div class="ni
+tem"><div class="ndate"><b>—</b><span>Club</span></div><div><h3>Chargement des actus…</h3></div></div>
   </div>
   <p class="note">Les actus sont publiées directement par le club au fil de la saison.</p>
 </section>
@@ -143,13 +148,15 @@ table.tarifs td.prix { text-align:right; font-weight:800; color:#003366; white-s
 </section>
 
 <footer>
-  Volley Biesheim — club affilié à la FFVB • Hall des Sports de Biesheim (Haut-Rhin)<br/>
+  Volley Biesheim — club affilié à la FFVB • Hall des Sports de Biesheim (Haut-Rhin
+)<br/>
   Suivez-nous sur <a href="https://www.facebook.com/VolleyBiesheim" target="_blank" rel="noopener">Facebook</a>
 </footer>
 <nav class="tabbar">
   <a class="tab active" href="index.html"><span class="ic">🏠</span>Accueil</a>
   <a class="tab " href="club.html"><span class="ic">🏛️</span>Le club</a>
   <a class="tab " href="photos.html"><span class="ic">📷</span>Photos</a>
+  <a class="tab " href="agenda.html"><span class="ic">📅</span>Agenda</a>
   <a class="tab " href="contact.html"><span class="ic">✉️</span>Inscriptions</a>
 </nav>
 <script>
@@ -181,7 +188,8 @@ function afficher(fichiers) {
   }
   // Tri : datées d'abord (plus récentes en premier), non datées ensuite
   actus.sort(function(a, b) {
-    var da = (a.name.match(/^(\d{4})-(\d{2})-(\d{2})/) || [])[0] || "";
+    var da = (a.name.match(/
+^(\d{4})-(\d{2})-(\d{2})/) || [])[0] || "";
     var db = (b.name.match(/^(\d{4})-(\d{2})-(\d{2})/) || [])[0] || "";
     return db.localeCompare(da);
   });

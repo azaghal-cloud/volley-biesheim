@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Agenda du Volley Biesheim : matchs, tournois et événements du club." />
+<title>Agenda — Volley Biesheim</title>
+<link rel="icon" href="ressources/logo.png" />
+<style>
+:root { font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:#0f172a; background:#fff; margin:0; }
+* { box-sizing:border-box; } a { color:#0066CC; }
+.top { background:#003366; color:#fff; padding:10px 16px; position:sticky; top:0; z-index:10; box-shadow:0 2px 10px rgba(0,51,102,.35); }
+.top-inner { display:flex; align-items:center; justify-content:space-between; gap:10px; max-width:1100px; margin:0 auto; }
+.brand { display:flex; align-items:center; gap:9px; font-weight:800; text-decoration:none; color:#fff; white-space:nowrap; }
+.ball { height:34px; width:auto; }
+.top nav { display:none; gap:18px; font-size:14px; font-weight:600; }
+.top nav a { color:#cbd5e1; text-decoration:none; padding-bottom:3px; }
+.top nav a.on { color:#fff; border-bottom:2px solid #f59e0b; }
+.fb-btn { background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.35); color:#fff; padding:6px 12px; border-radius:999px; font-size:12px; font-weight:600; text-decoration:none; white-space:nowrap; }
+.hero { background:#003366; position:relative; color:#fff; padding:0 18px 26px; overflow:hidden; }
+.hero::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 85% 10%, rgba(255,255,255,.07) 0 40px, transparent 41px), repeating-radial-gradient(circle at 50% 120%, transparent 0 38px, rgba(255,255,255,.04) 38px 40px); }
+.hero > * { position:relative; max-width:1100px; margin:0 auto; }
+.bandeau { text-align:center; padding:14px 0 10px; }
+.btitle { font-size:22px; font-weight:900; letter-spacing:3px; margin:0 0 8px; }
+.chevron { width:36px; height:20px; margin:0 auto; display:block; }
+.hero h1 { margin:8px 0 8px; font-size:22px; line-height:1.2; }
+.hero p { margin:0 0 16px; font-size:14px; opacity:.92; line-height:1.55; }
+section { padding:22px 16px 4px; max-width:1100px; margin:0 auto; }
+h2 { font-size:16px; margin:0 0 12px; color:#003366; display:flex; align-items:center; gap:8px; }
+h2 .dot { width:8px; height:8px; background:#f59e0b; border-radius:50%; }
+.cal-wrap { border:1px solid #e2e8f0; border-radius:14px; overflow:hidden; background:#fff; }
+.cal-head { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:#f8fafc; border-bottom:1px solid #e2e8f0; }
+.cal-head b { color:#003366; font-size:15px; text-transform:capitalize; }
+.cal-nav { background:#fff; border:1px solid #e2e8f0; color:#0066CC; font-weight:800; width:34px; height:34px; border-radius:10px; font-size:16px; cursor:pointer; }
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); }
+.cal-dow { font-size:10.5px; font-weight:800; color:#94a3b8; text-transform:uppercase; text-align:center; padding:8px 0; }
+.cal-day { padding:9px 2px 7px; text-align:center; font-size:13px; color:#0f172a; border-top:1px solid #f1f5f9; cursor:pointer; position:relative; }
+.cal-day.off { color:#cbd5e1; }
+.cal-day.today b { color:#f59e0b; text-decoration:underline; }
+.cal-day.sel { background:#eff6ff; }
+.cal-day.sel.off { background:#f8fafc; }
+.cal-day .ev { width:5px; height:5px; border-radius:50%; background:#f59e0b; display:block; margin:3px auto 0; }
+.evlist { display:flex; flex-direction:column; gap:8px; margin-top:14px; }
+.evitem { border:1px solid #e2e8f0; border-radius:12px; padding:11px 13px; display:flex; gap:11px; align-items:flex-start; }
+.evwhen { background:#003366; color:#fff; border-radius:10px; min-width:48px; text-align:center; padding:6px 2px; align-self:flex-start; }
+.evwhen b { display:block; font-size:15px; }
+.evwhen span { font-size:9.5px; text-transform:uppercase; }
+.evitem h3 { margin:0 0 2px; font-size:14px; color:#003366; }
+.evitem p { margin:0; font-size:12.5px; color:#64748b; }
+.ph-empty { text-align:center; padding:40px 16px; color:#94a3b8; font-size:14px; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:14px; }
+.note { font-size:11px; color:#94a3b8; margin:8px 2px 0; }
+footer { padding:24px 16px 90px; text-align:center; font-size:11px; color:#94a3b8; max-width:1100px; margin:0 auto; }
+.tabbar { display:flex; border-top:1px solid #e2e8f0; background:#fff; position:fixed; bottom:0; left:0; right:0; box-shadow:0 -4px 14px rgba(15,23,42,.08); }
+.tab { flex:1; text-align:center; padding:9px 4px 12px; font-size:10.5px; font-weight:600; color:#64748b; text-decoration:none; }
+.tab .ic { display:block; font-size:18px; margin-bottom:2px; }
+.tab.active { color:#0066CC; }
+@media (min-width:960px) { .top nav { display:flex; } .hero { padding:0 32px 34px; } .btitle { font-size:36px; letter-spacing:7px; padding-top:8px; } .chevron { width:56px; height:30px; } .hero h1 { font-size:30px; margin:12px 0 10px; } section { padding:26px 32px 6px; } h2 { font-size:18px; } .tabbar { display:none; } footer { padding-bottom:30px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="index.html">
+      <img class="ball" src="ressources/logo.png" alt="Logo Volley Biesheim"> Volley Biesheim
+    </a>
+  <nav>
+    <a class="" href="index.html">Accueil</a>
+    <a class="" href="club.html">Le club</a>
+    <a class="" href="photos.html">Photos</a>
+    <a class="on" href="agenda.html">Agenda</a>
+    <a class="" href="contact.html">Inscriptions</a>
+  </nav>
+    <a class="fb-btn" href="https://www.facebook.com/VolleyBiesheim" target="_blank" rel="noopener">Suivre sur Facebook</a>
+  </div>
+</header>
+<div class="hero">
+  <div class="bandeau">
+    <p class="btitle">AGENDA</p>
+    <svg class="chevron" viewBox="0 0 36 20"><path d="M2 2 L18 18 L34 2" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+  </div>
+  <h1>Tous les rendez-vous du club 📅</h1>
+  <p>Matchs, tournois, stages et événements : tout est ici. Touchez un jour pour voir le détail.</p>
+</div>
+
+<section>
+  <h2><span class="dot"></span>Calendrier</h2>
+  <div class="cal-wrap">
+    <div class="cal-head">
+      <button class="cal-nav" id="prev" aria-label="Mois précédent">‹</button>
+      <b id="mname">—</b>
+      <button class="cal-nav" id="next" aria-label="Mois suivant">›</button>
+    </div>
+    <div class="cal-grid" id="grid"></div>
+  </div>
+  <h2 style="margin-top:20px;"><span class="dot"></span><span id="daytitle">Sélectionnez un jour</span></h2>
+  <div class="evlist" id="evlist"></div>
+  <p class="note">Agenda synchronisé automatiquement depuis le calendrier du club (frama.space), plusieurs fois par jour. En cas d'oubli, le site affiche les dernières données synchronisées.</p>
+</section>
+<footer>
+  Volley Biesheim — club affilié à la FFVB • Hall des Sports de Biesheim (Haut-Rhin)<br/>
+  Suivez-nous sur <a href="https://www.facebook.com/VolleyBiesheim" target="_blank" rel="noopener">Facebook</a>
+</footer>
+<nav class="tabbar">
+  <a class="tab " href="index.html"><span class="ic">🏠</span>Accueil</a>
+  <a class="tab " href="club.html"><span class="ic">🏛️</span>Le club</a>
+  <a class="tab " href="photos.html"><span class="ic">📷</span>Photos</a>
+  <a class="tab active" href="agenda.html"><span class="ic">📅</span>Agenda</a>
+  <a class="tab " href="contact.html"><span class="ic">✉️</span>Inscriptions</a>
+</nav>
+<script>
+var MOIS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+var JOURS=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+var evs=[]; var cur=new Date(); cur.setDate(1); var sel=null; var map={};
+
+function pad(n){return n<10?'0'+n:''+n;}
+function ymd(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+function unesc(v){return v.replace(/\\n/g,'\n').replace(/\\,/g,',').replace(/\\;/g,';');}
+function parseDT(v){
+  var m=/^(\d{4})(\d{2})(\d{2})(?:T(\d{2})(\d{2})(\d{2}))?(Z)?$/.exec(v);
+  if(!m)return null;
+  var d;
+  if(m[7]==='Z'){d=new Date(Date.UTC(+m[1],+m[2]-1,+m[3],+(m[4]||0),+(m[5]||0),+(m[6]||0)));}
+  else{d=new Date(+m[1],+m[2]-1,+m[3],+(m[4]||0),+(m[5]||0),+(m[6]||0));}
+  return {d:d,time:!!m[4]};
+}
+function parseRRULE(v){
+  var r={freq:null,interval:1,count:null,until:null},kv=v.split(';');
+  for(var i=0;i<kv.length;i++){
+    var p=kv[i].split('='),k=p[0],x=p[1];
+    if(k==='FREQ')r.freq=x;
+    else if(k==='INTERVAL')r.interval=parseInt(x,10)||1;
+    else if(k==='COUNT')r.count=parseInt(x,10)||null;
+    else if(k==='UNTIL'){var u=parseDT(x);if(u)r.until=u.d;}
+  }
+  return r.freq?r:null;
+}
+function parseICS(t){
+  var out=[],lines=t.replace(/\r\n/g,'\n').replace(/\r/g,'\n').replace(/\n[ \t]/g,'').split('\n'),ev=null;
+  for(var i=0;i<lines.length;i++){
+    var L=lines[i];
+    if(L.indexOf('BEGIN:VEVENT')===0){ev={ex:[]};}
+    else if(L.indexOf('END:VEVENT')===0){if(ev&&ev.start)out.push(ev);ev=null;}
+    else if(ev){
+      var c=L.indexOf(':');if(c<0)continue;
+      var key=L.slice(0,c),val=L.slice(c+1),sc=key.indexOf(';');
+      key=sc>-1?key.slice(0,sc):key;
+      if(key==='DTSTART')ev.start=parseDT(val);
+      else if(key==='DTEND')ev.end=parseDT(val);
+      else if(key==='SUMMARY')ev.title=unesc(val);
+      else if(key==='LOCATION')ev.location=unesc(val);
+      else if(key==='DESCRIPTION')ev.desc=unesc(val);
+      else if(key==='RRULE')ev.rrule=parseRRULE(val);
+      else if(key==='EXDATE'){var d=parseDT(val);if(d)ev.ex.push(ymd(d.d));}
+    }
+  }
+  return out;
+}
+function occurrences(ev,from,to){
+  var s=ev.start;if(!s)return[];
+  if(!ev.rrule){return(s.d>=from&&s.d<=to)?[s]:[];}
+  var r=ev.rrule,out=[],d=new Date(s.d),n=0,cnt=0;
+  while(n<800){
+    if(d>to)break;
+    if(r.until&&d>r.until)break;
+    if(d>=from){out.push({d:new Date(d),time:s.time});if(r.count&&++cnt>=r.count)break;}
+    if(r.freq==='DAILY')d.setDate(d.getDate()+r.interval);
+    else if(r.freq==='WEEKLY')d.setDate(d.getDate()+7*r.interval);
+    else if(r.freq==='MONTHLY')d.setMonth(d.getMonth()+r.interval);
+    else if(r.freq==='YEARLY')d.setFullYear(d.getFullYear()+r.interval);
+    else break;
+    n++;
+  }
+  return out;
+}
+function buildMap(){
+  map={};
+  var from=new Date(cur.getFullYear(),cur.getMonth(),1),to=new Date(cur.getFullYear(),cur.getMonth()+1,0,23,59,59);
+  evs.forEach(function(ev){
+    var ex={};ev.ex.forEach(function(x){ex[x]=1;});
+    occurrences(ev,from,to).forEach(function(o){
+      if(ex[ymd(o.d)])return;
+      var end=(ev.end&&ev.end.d>o.d)?ev.end.d:o.d,dd=new Date(o.d),k=0;
+      while(dd<=end&&k<60){
+        var ky=ymd(dd);
+        if(ky>=ymd(from)&&ky<=ymd(to)){(map[ky]=map[ky]||[]).push({ev:ev,start:o});}
+        dd.setDate(dd.getDate()+1);k++;
+      }
+    });
+  });
+}
+function fmtTime(d){return pad(d.getHours())+'h'+(d.getMinutes()?pad(d.getMinutes()):'');}
+function render(){
+  document.getElementById('mname').textContent=MOIS[cur.getMonth()]+' '+cur.getFullYear();
+  buildMap();
+  var g=document.getElementById('grid');g.innerHTML='';
+  for(var i=0;i<7;i++){var dw=document.createElement('div');dw.className='cal-dow';dw.textContent=JOURS[i];g.appendChild(dw);}
+  var first=new Date(cur.getFullYear(),cur.getMonth(),1);
+  var start=(first.getDay()+6)%7;
+  var nd=new Date(cur.getFullYear(),cur.getMonth()+1,0).getDate();
+  var today=new Date(),ty=ymd(today);
+  var cells=start+nd,maxRow=Math.ceil(cells/7)*7;
+  for(var c=0;c<maxRow;c++){
+    var cell=document.createElement('div');cell.className='cal-day';
+    var dn=c-start+1;
+    if(dn<1||dn>nd){cell.className+=' off';cell.innerHTML='&nbsp;';}
+    else{
+      var d2=new Date(cur.getFullYear(),cur.getMonth(),dn),ky=ymd(d2);
+      cell.setAttribute('data-ymd',ky);
+      if(ky===ty)cell.className+=' today';
+      if(sel===ky)cell.className+=' sel';
+      cell.innerHTML='<b>'+dn+'</b>'+(map[ky]?'<span class="ev"></span>':'');
+    }
+    g.appendChild(cell);
+  }
+  if(!sel){var tky=ty.slice(0,7)===ymd(cur).slice(0,7)?ty:ymd(new Date(cur.getFullYear(),cur.getMonth(),1));sel=tky;}
+  renderDay();
+}
+function renderDay(){
+  var list=map[sel]||[];
+  var lbl=sel?sel.split('-'):[0,0,0];
+  var dd=new Date(+lbl[0],+lbl[1]-1,+lbl[2]);
+  document.getElementById('daytitle').textContent=dd.getDate()+' '+MOIS[dd.getMonth()];
+  var el=document.getElementById('evlist');el.innerHTML='';
+  if(!sel){return;}
+  if(!list.length){el.innerHTML='<div class="ph-empty">Aucun événement ce jour-là.</div>';return;}
+  list.sort(function(a,b){return a.start.d-b.start.d;});
+  list.forEach(function(it){
+    var ev=it.ev,d=it.start.d;
+    var div=document.createElement('div');div.className='evitem';
+    var when='<div class="evwhen"><b>'+d.getDate()+'</b><span>'+MOIS[d.getMonth()].slice(0,4)+'</span></div>';
+    var when2=it.start.time?' <span style="font-weight:700;color:#0066CC;">'+fmtTime(d)+'</span>':'';
+    var loc=ev.location?' — '+ev.location:'';
+    var desc=ev.desc?'<p>'+ev.desc.split('\n')[0]+'</p>':'';
+    div.innerHTML=when+'<div><h3>'+(ev.title||'Événement')+when2+loc+'</h3>'+desc+'</div>';
+    el.appendChild(div);
+  });
+}
+document.getElementById('prev').onclick=function(){cur.setMonth(cur.getMonth()-1);sel=null;render();};
+document.getElementById('next').onclick=function(){cur.setMonth(cur.getMonth()+1);sel=null;render();};
+document.getElementById('grid').addEventListener('click',function(e){
+  var c=e.target.closest('.cal-day');if(!c||!c.getAttribute('data-ymd'))return;
+  sel=c.getAttribute('data-ymd');
+  document.querySelectorAll('.cal-day.sel').forEach(function(x){x.classList.remove('sel');});
+  c.classList.add('sel');renderDay();
+});
+fetch('agenda.ics').then(function(r){if(!r.ok)throw 0;return r.text();}).then(function(t){
+  evs=parseICS(t);
+  if(!evs.length){document.getElementById('evlist').innerHTML='<div class="ph-empty">L\'agenda est vide pour le moment. Les prochains événements apparaîtront ici.</div>';}
+  render();
+}).catch(function(){
+  document.getElementById('evlist').innerHTML='<div class="ph-empty">L\'agenda est en cours de synchronisation… Repassez dans quelques minutes !</div>';
+});
+</script>
+</body>
+</html>
