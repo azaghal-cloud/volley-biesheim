@@ -24,7 +24,15 @@ jobs:
             echo "Secrets FRAMA_USER / FRAMA_PASS / FRAMA_CAL_URL manquants. Voir Settings > Secrets and variables > Actions."
             exit 1
           fi
-          curl -f -u "$FRAMA_USER:$FRAMA_PASS" "$FRAMA_CAL_URL" -o agenda.ics.new
+          code=$(curl -sS -u "$FRAMA_USER:$FRAMA_PASS" -o agenda.ics.new -w "%{http_code}" "$FRAMA_CAL_URL" || true)
+          echo "HTTP code reçu : $code"
+          if [ "$code" != "200" ] && [ "$code" != "207" ]; then
+            echo "Téléchargement échoué (HTTP $code)."
+            echo "  401 = identifiants invalides (vérifie FRAMA_USER / FRAMA_PASS : mot de passe d'application frama.space)"
+            echo "  404 = URL du calendrier invalide (vérifie FRAMA_CAL_URL)"
+            echo "URL utilisée (masquée) : $(echo "$FRAMA_CAL_URL" | sed 's|//[^/]*@|//***@|')"
+            exit 1
+          fi
           if [ ! -s agenda.ics.new ]; then echo "ICS vide ou invalide"; exit 1; fi
           if ! grep -q "BEGIN:VCALENDAR" agenda.ics.new; then echo "Réponse non ICS"; exit 1; fi
           mv agenda.ics.new agenda.ics
