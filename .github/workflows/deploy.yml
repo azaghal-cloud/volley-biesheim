@@ -36,22 +36,21 @@ jobs:
           const dir = "actus";
           const out = [];
           const petites = new Set(["de","du","des","la","le","les","et","a","au","aux","en","d","l"]);
+          const elision = ["d","l","s","n","j","qu","c","m","t"];
+          function capWord(p) {
+            if (p.length === 0) return p;
+            if (p === p.toUpperCase() && p.length <= 6) return p;
+            return p.charAt(0).toUpperCase() + p.slice(1);
+          }
           function capitalize(t) {
             return t.split(" ").map(function(w, i) {
               if (w.length === 0) return w;
-              var morceaux = w.split("'");
-              // mots élidés : d', l', s', n', j', qu', c' -> minuscules
-              var elision = ["d", "l", "s", "n", "j", "qu", "c", "m", "t"];
-              if (elision.indexOf(morceaux[0].toLowerCase()) !== -1 && morceaux.length > 1) {
-                return morceaux[0].toLowerCase() + "'" + morceaux.slice(1).map(function(p) {
-                  if (p.length === 0) return p;
-                  if (p === p.toUpperCase() && p.length <= 6) return p;
-                  return p.charAt(0).toUpperCase() + p.slice(1);
-                }).join("'");
+              var m2 = w.split("'");
+              if (m2.length > 1 && elision.indexOf(m2[0].toLowerCase()) !== -1) {
+                return m2[0].toLowerCase() + "'" + m2.slice(1).map(capWord).join("'");
               }
               if (i > 0 && petites.has(w.toLowerCase())) return w.toLowerCase();
-              if (w === w.toUpperCase() && w.length <= 6) return w;
-              return w.charAt(0).toUpperCase() + w.slice(1);
+              return capWord(w);
             }).join(" ");
           }
           for (const f of fs.readdirSync(dir)) {
@@ -59,7 +58,7 @@ jobs:
             const txt = fs.readFileSync(dir + "/" + f, "utf8").trim();
             if (!txt) continue;
             const lignes = txt.split("\n");
-            const m = f.match(/^(\d{4})-(\d{2})-(\d{2})/);
+            const m3 = f.match(/^(\d{4})-(\d{2})-(\d{2})/);
             let titre = f.replace(/\.txt$/i, "").replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/[-_]+/g, " ");
             titre = capitalize(titre.trim());
             let categorie = "";
@@ -68,9 +67,8 @@ jobs:
               categorie = lignes[0].trim();
               texte = lignes.slice(1).join("\n").trim();
             }
-            out.push({ titre: titre, cate
-gorie: categorie, texte: texte,
-              date: m ? m[0] : null, jour: m ? parseInt(m[3], 10) : null, mois: m ? parseInt(m[2], 10) : null });
+            out.push({ titre: titre, categorie: categorie, texte: texte,
+              date: m3 ? m3[0] : null, jour: m3 ? parseInt(m3[3], 10) : null, mois: m3 ? parseInt(m3[2], 10) : null });
           }
           out.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
           fs.writeFileSync("actus.json", JSON.stringify(out, null, 1));
