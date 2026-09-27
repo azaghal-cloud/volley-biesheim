@@ -38,8 +38,18 @@ jobs:
           const petites = new Set(["de","du","des","la","le","les","et","a","au","aux","en","d","l"]);
           function capitalize(t) {
             return t.split(" ").map(function(w, i) {
-              if (i > 0 && petites.has(w.toLowerCase())) return w.toLowerCase();
               if (w.length === 0) return w;
+              var morceaux = w.split("'");
+              // mots élidés : d', l', s', n', j', qu', c' -> minuscules
+              var elision = ["d", "l", "s", "n", "j", "qu", "c", "m", "t"];
+              if (elision.indexOf(morceaux[0].toLowerCase()) !== -1 && morceaux.length > 1) {
+                return morceaux[0].toLowerCase() + "'" + morceaux.slice(1).map(function(p) {
+                  if (p.length === 0) return p;
+                  if (p === p.toUpperCase() && p.length <= 6) return p;
+                  return p.charAt(0).toUpperCase() + p.slice(1);
+                }).join("'");
+              }
+              if (i > 0 && petites.has(w.toLowerCase())) return w.toLowerCase();
               if (w === w.toUpperCase() && w.length <= 6) return w;
               return w.charAt(0).toUpperCase() + w.slice(1);
             }).join(" ");
@@ -58,7 +68,8 @@ jobs:
               categorie = lignes[0].trim();
               texte = lignes.slice(1).join("\n").trim();
             }
-            out.push({ titre: titre, categorie: categorie, texte: texte,
+            out.push({ titre: titre, cate
+gorie: categorie, texte: texte,
               date: m ? m[0] : null, jour: m ? parseInt(m[3], 10) : null, mois: m ? parseInt(m[2], 10) : null });
           }
           out.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
