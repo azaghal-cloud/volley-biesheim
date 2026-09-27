@@ -23,7 +23,8 @@
 .bandeau { text-align:center; padding:14px 0 10px; }
 .btitle { font-size:22px; font-weight:900; letter-spacing:3px; margin:0 0 8px; }
 .chevron { width:36px; height:20px; margin:0 auto; display:block; }
-.hero h1 { margin:8px 0 8px; font-size:22px; line-height:1.2; }
+.hero h1 { margin:8px 0 8px; font-s
+ize:22px; line-height:1.2; }
 .hero p { margin:0 0 16px; font-size:14px; opacity:.92; line-height:1.55; }
 section { padding:22px 16px 4px; max-width:1100px; margin:0 auto; }
 h2 { font-size:16px; margin:0 0 12px; color:#003366; display:flex; align-items:center; gap:8px; }
@@ -46,7 +47,8 @@ h2 .dot { width:8px; height:8px; background:#f59e0b; border-radius:50%; }
 .evwhen b { display:block; font-size:15px; }
 .evwhen span { font-size:9.5px; text-transform:uppercase; }
 .evitem h3 { margin:0 0 2px; font-size:14px; color:#003366; }
-.evitem p { margin:0; font-size:12.5px; color:#64748b; }
+.evitem p { margin:0; font-size:12.5px; co
+lor:#64748b; }
 .ph-empty { text-align:center; padding:40px 16px; color:#94a3b8; font-size:14px; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:14px; }
 .note { font-size:11px; color:#94a3b8; margin:8px 2px 0; }
 footer { padding:24px 16px 90px; text-align:center; font-size:11px; color:#94a3b8; max-width:1100px; margin:0 auto; }
@@ -79,7 +81,8 @@ footer { padding:24px 16px 90px; text-align:center; font-size:11px; color:#94a3b
     <svg class="chevron" viewBox="0 0 36 20"><path d="M2 2 L18 18 L34 2" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
   </div>
   <h1>Tous les rendez-vous du club 📅</h1>
-  <p>Matchs, tournois, stages et événements : tout est ici. Touchez un jour pour voir le détail.</p>
+  <p>Matchs, tournois, stages et é
+vénements : tout est ici. Touchez un jour pour voir le détail.</p>
 </div>
 
 <section>
@@ -117,7 +120,8 @@ function ymd(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate
 function unesc(v){return v.replace(/\\n/g,'\n').replace(/\\,/g,',').replace(/\\;/g,';');}
 function parseDT(v){
   var m=/^(\d{4})(\d{2})(\d{2})(?:T(\d{2})(\d{2})(\d{2}))?(Z)?$/.exec(v);
-  if(!m)return null;
+  if(!m)return 
+null;
   var d;
   if(m[7]==='Z'){d=new Date(Date.UTC(+m[1],+m[2]-1,+m[3],+(m[4]||0),+(m[5]||0),+(m[6]||0)));}
   else{d=new Date(+m[1],+m[2]-1,+m[3],+(m[4]||0),+(m[5]||0),+(m[6]||0));}
@@ -165,7 +169,8 @@ function occurrences(ev,from,to){
     if(d>=from){out.push({d:new Date(d),time:s.time});if(r.count&&++cnt>=r.count)break;}
     if(r.freq==='DAILY')d.setDate(d.getDate()+r.interval);
     else if(r.freq==='WEEKLY')d.setDate(d.getDate()+7*r.interval);
-    else if(r.freq==='MONTHLY')d.setMonth(d.getMonth()+r.interval);
+    else if(r.freq==='MONTHLY')d.setMonth(d.
+getMonth()+r.interval);
     else if(r.freq==='YEARLY')d.setFullYear(d.getFullYear()+r.interval);
     else break;
     n++;
@@ -213,7 +218,8 @@ function render(){
     g.appendChild(cell);
   }
   if(!sel){var tky=ty.slice(0,7)===ymd(cur).slice(0,7)?ty:ymd(new Date(cur.getFullYear(),cur.getMonth(),1));sel=tky;}
-  renderDay();
+  render
+Day();
 }
 function renderDay(){
   var list=map[sel]||[];
@@ -243,12 +249,13 @@ document.getElementById('grid').addEventListener('click',function(e){
   document.querySelectorAll('.cal-day.sel').forEach(function(x){x.classList.remove('sel');});
   c.classList.add('sel');renderDay();
 });
-fetch('agenda.ics').then(function(r){if(!r.ok)throw 0;return r.text();}).then(function(t){
+fetch('agenda.ics?v=' + Math.floor(Date.now() / 3600000)).then(function(r){if(!r.ok)throw 0;return r.text();}).then(function(t){
   evs=parseICS(t);
   if(!evs.length){document.getElementById('evlist').innerHTML='<div class="ph-empty">L\'agenda est vide pour le moment. Les prochains événements apparaîtront ici.</div>';}
   render();
 }).catch(function(){
-  document.getElementById('evlist').innerHTML='<div class="ph-empty">L\'agenda est en cours de synchronisation… Repassez dans quelques minutes !</div>';
+  document.getElementById('evlist').innerHTML='<div class="ph-empty">L\'agenda est en cours de synchronisation… Repassez dan
+s quelques minutes !</div>';
 });
 </script>
 </body>
