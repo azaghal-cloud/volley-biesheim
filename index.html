@@ -24,6 +24,7 @@
 .bandeau-img { width:100%; max-width:560px; dis
 
 
+
 play:block; margin:0 auto; height:auto; }
 .btitle { font-size:22px; font-weight:900; letter-spacing:3px; margin:0 0 8px; }
 .chevron { width:36px; height:20px; margin:0 auto; display:block; }
@@ -50,7 +51,8 @@ h2 .dot { width:8px; height:8px; background:#f59e0b; border-radius:50%; }
 .cal { border:1px solid #e2e8f0; border-radius:14px; overflow:hidden; }
 .crow { display:flex; justify-content:space-between; gap:8px; padding:11px 14px; font-size:13px; border-bottom:1px solid #f1f5f9; }
 .crow:last-child { border:none; }
-.crow.domicile { ba
+.crow.domicile { b
+a
 c
 k
 ground:#f0fdf4; }
@@ -79,7 +81,8 @@ table.tarifs td.prix { text-align:right; font-weight:800; color:#003366; white-s
 .pole div { background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:10px 12px; font-size:13px; }
 .pole b { color:#003366; display:block; }
 .pole span { font-size:11px; color:#64748b; }
-@media (min-width:640px) { .hero { padding:0 24px 30px; } .hero h1 { font-size:26px; } .btitle { font-size:
+@media (min-width:640px) { .hero { padding:0 24px 30px; } .hero h1 { font-size:26px; } .btitle { font-siz
+e:
 28
 px
 ; letter-spacing:5px; } .news { flex-direction:row; flex-wrap:wrap; } .nitem { flex:1 1 45%; flex-direction:column; gap:8px; } .ndate { align-self:flex-start; } .teams, .pole { grid-template-columns:repeat(3,1fr); } }
@@ -116,6 +119,7 @@ px
 
 <section id="actus">
   <h2><span class="dot"></span>Dernières actus</h2>
+
   
 <di
 v class="news" id="news-list">
@@ -159,41 +163,6 @@ tem"><div class="ndate"><b>—</b><span>Club</span></div><div><h3>Chargement des
   <a class="tab " href="agenda.html"><span class="ic">📅</span>Agenda</a>
   <a class="tab " href="contact.html"><span class="ic">✉️</span>Inscriptions</a>
 </nav>
-<script>
-var MOIS = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
-function moisAbrev(n) { return MOIS[n - 1].slice(0, 4) + "."; }
-function esc(s) {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-function carte(actu) {
-  var dateHtml;
-  if (actu.date) {
-    dateHtml = '<div class="ndate"><b>' + actu.jour + '</b><span>' + moisAbrev(actu.mois) + '</span></div>';
-  } else {
-    dateHtml = '<div class="ndate"><b>—</b><span>' + esc(actu.categorie || "Club") + '</span></div>';
-  }
-  var catHtml = actu.categorie ? '<time>' + esc(actu.categorie) + '</time>' : "";
-  var corps = actu.texte.split(/\n\s*\n/).map(function(p) { return "<p>" + esc(p.trim()) + "</p>"; }).join("");
-  return '<article class="nitem">' + dateHtml + '<div><h3>' + esc(actu.titre) + '</h3>' + catHtml + corps + '</div></article>';
-}
-function afficherActus(actus) {
-  var liste = document.getElementById("news-list");
-  if (!actus || !actus.length) {
-    liste.innerHTML = '<div class="nitem"><div class="ndate"><b>—</b><span>Club</span></div><div><h3>Les actus arrivent bientôt !</h3></div></div>';
-    return;
-  }
-  liste.innerHTML = actus.map(carte).join("");
-}
-fetch("actus.json", { cache: "no-cache" })
-  .then(function(r) { if (!r.ok) throw new Error("no actus.json"); return r.json(); })
-  .then(function(actus) {
-    actus.sort(fun
-ction(a, b) { return (b.date || "").localeCompare(a.date || ""); });
-    afficherActus(actus.slice(0, 6));
-  })
-  .catch(function() {
-    document.getElementById("news-list").innerHTML = '<div class="nitem"><div class="ndate"><b>—</b><span>Club</span></div><div><h3>Les actus arrivent bientôt !</h3></div></div>';
-  });
-</script>
+<script src="js/actus.js"></script>
 </body>
 </html>
