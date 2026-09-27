@@ -31,17 +31,28 @@ jobs:
 
       - name: Générer actus.json depuis les fichiers actus/*.txt
         run: |
-          node -e '
+node -e '
           const fs = require("fs");
           const dir = "actus";
           const out = [];
+          const petites = new Set(["de","du","des","la","le","les","et","à","au","aux","en","d","l"]);
+          function capitalize(t) {
+            return t.split(" ").map(function(w, i) {
+              if (i > 0 && petites.has(w.toLowerCase())) return w.toLowerCase();
+              if (w.length === 0) return w;
+              // garder les mots déjà en majuscule (M11, M13, FFVB...)
+              if (w === w.toUpperCase() && w.length <= 6) return w;
+              return w.charAt(0).toUpperCase() + w.slice(1);
+            }).join(" ");
+          }
           for (const f of fs.readdirSync(dir)) {
             if (!/\.txt$/i.test(f)) continue;
             const txt = fs.readFileSync(dir + "/" + f, "utf8").trim();
             if (!txt) continue;
             const lignes = txt.split("\n");
             const m = f.match(/^(\d{4})-(\d{2})-(\d{2})/);
-            const titre = f.replace(/\.txt$/i, "").replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/[-_]+/g, " ");
+            let titre = f.replace(/\.txt$/i, "").replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/[-_]+/g, " ");
+            titre = capitalize(titre.trim());
             let categorie = "";
             let texte = txt;
             if (lignes.length > 1 && lignes[0].trim().length > 0 && lignes[0].length < 60) {
@@ -53,7 +64,7 @@ jobs:
           }
           out.sort((a,b) => (b.date||"").localeCompare(a.date||""));
           fs.writeFileSync("actus.json", JSON.stringify(out));
-          console.log("actus.json genere : " + out.length + " actus");
+          
           '
 
       - uses: actions/configure-pages@v5
@@ -61,4 +72,5 @@ jobs:
         with:
           path: .
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-
+pages@v4
