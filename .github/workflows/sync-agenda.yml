@@ -7,8 +7,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   sync:
@@ -32,7 +30,6 @@ jobs:
             echo "Téléchargement échoué (HTTP $code)."
             echo "  401 = identifiants invalides (vérifie FRAMA_USER / FRAMA_PASS : mot de passe d'application frama.space)"
             echo "  404 = URL du calendrier invalide (vérifie FRAMA_CAL_URL)"
-            echo "URL utilisée (masquée) : $(echo "$FRAMA_CAL_URL" | sed 's|//[^/]*@|//***@|')"
             exit 1
           fi
           if [ ! -s agenda.ics.new ]; then echo "ICS vide ou invalide"; exit 1; fi
@@ -49,13 +46,4 @@ jobs:
           else
             git commit -m "Agenda : synchronisation automatique de l'ICS (frama.space)"
             git push
-          fi
-
-      - name: Redéployer GitHub Pages
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if git diff --quiet HEAD~1 2>/dev/null || true; then :; fi
-          if git log -1 --format='%s' | grep -q "synchronisation automatique"; then
-            gh workflow run deploy.yml --ref main || echo "Déclenchement deploy impossible (ignoré)"
           fi
