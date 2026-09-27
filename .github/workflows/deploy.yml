@@ -31,16 +31,15 @@ jobs:
 
       - name: Générer actus.json depuis les fichiers actus/*.txt
         run: |
-node -e '
+          cat > /tmp/gen.js << 'EOF'
           const fs = require("fs");
           const dir = "actus";
           const out = [];
-          const petites = new Set(["de","du","des","la","le","les","et","à","au","aux","en","d","l"]);
+          const petites = new Set(["de","du","des","la","le","les","et","a","au","aux","en","d","l"]);
           function capitalize(t) {
             return t.split(" ").map(function(w, i) {
               if (i > 0 && petites.has(w.toLowerCase())) return w.toLowerCase();
               if (w.length === 0) return w;
-              // garder les mots déjà en majuscule (M11, M13, FFVB...)
               if (w === w.toUpperCase() && w.length <= 6) return w;
               return w.charAt(0).toUpperCase() + w.slice(1);
             }).join(" ");
@@ -60,17 +59,18 @@ node -e '
               texte = lignes.slice(1).join("\n").trim();
             }
             out.push({ titre: titre, categorie: categorie, texte: texte,
-              date: m ? m[0] : null, jour: m ? parseInt(m[3],10) : null, mois: m ? parseInt(m[2],10) : null });
+              date: m ? m[0] : null, jour: m ? parseInt(m[3], 10) : null, mois: m ? parseInt(m[2], 10) : null });
           }
-          out.sort((a,b) => (b.date||"").localeCompare(a.date||""));
-          fs.writeFileSync("actus.json", JSON.stringify(out));
-          
-          '
+          out.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+          fs.writeFileSync("actus.json", JSON.stringify(out, null, 1));
+          console.log("actus.json genere :", out.length, "actus");
+          EOF
+          node /tmp/gen.js
+          cat actus.json | head -c 300
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
       - id: deployment
-        uses: actions/deploy-
-pages@v4
+        uses: actions/deploy-pages@v4
