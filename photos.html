@@ -24,6 +24,7 @@
 .bandeau-img { width:100%; max-width:560px; display:block; margin:0 auto; height:auto; }
 .btitle { font-size:22px; font-weight:900; letter-spacing:3px; margin:0 
 
+
 0 8px; }
 .chevron { width:36px; height:20px; margin:0 auto; display:block; }
 .hero h1 { margin:8px 0 8px; font-size:22px; line-height:1.2; }
@@ -51,7 +52,8 @@ h2 .dot { width:8px; height:8px; background:#f59e0b; border-radius:50%; }
 .crow:last-child { border:none; }
 .crow.domicile { background:#f0fdf4; }
 .badge { font-size:10px; font-weight:800; padding:3px 8px; border-radius:999px; }
-.badge.dom { 
+.badge.dom {
+ 
 b
 ackground:#dcfce7; color:#166534; }
 .badge.ext { background:#f1f5f9; color:#475569; }
@@ -79,7 +81,8 @@ table.tarifs td.prix { text-align:right; font-weight:800; color:#003366; white-s
 .pole span { font-size:11px; color:#64748b; }
 .gal { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 .gitem { border-radius:14px; overflow:hidden; border:1px solid #e2e8f0; background:#f1f5f9; text-decoration:none; display:block; }
-.gitem img { width:100%; dis
+.gitem img { width:100%; d
+is
 pl
 ay:block; aspect-ratio:4/3; object-fit:cover; }
 .gcap { font-size:12px; font-weight:700; color:#334155; padding:8px 10px; background:#fff; }
@@ -99,7 +102,8 @@ ay:block; aspect-ratio:4/3; object-fit:cover; }
 <header class="top">
   <div class="top-inner">
     <a class="brand" href="index.html">
-      <img class="ball" src="ressour
+      <img class="ball" src="ress
+our
 ces
 /logo.png" alt="Logo Volley Biesheim"> Volley Biesheim
     </a>
@@ -136,49 +140,7 @@ ces
   <div class="lb-cap" id="lb-cap"></div>
   <div class="lb-date" id="lb-date"></div>
 </div>
-<script>
-function libelle(nomFichier) {
-  return nomFichier.replace(/\.[^.]+$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/[-_]+/g, ' ');
-}
-function datePhoto(nomFichier) {
-  var m = nomFichier.match(/^(\d{4})-(\d{2})-(\d{2})/);
-  if (!m) return null;
-  var mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
-  return parseInt(m[3], 10) + " " + mois[parseInt(m[2], 10) - 1] + " " + m[1];
-}
-function afficher(data) {
-  var galerie = document.getElementById('galerie');
-  var photos = (data || []).filter(function(f) { return f.type === "file" && /\.(jpe?g|png|webp|gif)$/i.test(f.name); });
-  if (!photos.length
-) { galerie.innerHTML = '<div class="ph-empty">📸 L
-es photos arrivent bientôt !</div>'; return; }
-  photos.sort(function(a, b) { return b.name.localeCompare(a.name); });
-  galerie.innerHTML = photos.map(function(f) {
-    var lib = libelle(f.name);
-    var d = datePhoto(f.name);
-    return '<a class="gitem" href="' + f.download_url + '" target="_blank" rel="noopener" data-img="' + f.download_url + '" data-lib="' + lib + '" data-date="' + (d || '') + '">' +
-      '<img src="' + f.download_url + '" alt="' + lib + '" loading="lazy">' +
-      '<div class="gcap">' + lib + (d ? '<span>' + d + '</span>' : '') + '</div></a>';
-  }).join('');
-  var lb = document.getElementById('lightbox');
-  galerie.querySelectorAll('.gitem').forEach(function(a) {
-    a.addEventListener('click', function(ev) {
-      ev.preventDefault();
-      document.getElementById('lb-img').src = a.getAttribute('data-img');
-      document.getElementById('lb-cap').textContent = a.getAttribute('data-lib');
-      document.getElementById('lb-date').textContent = a.getAttribute('data-date');
-      lb.classList.add('open');
-    });
-  });
-  document.getElementById('lb-close').addEventListener('click', function() { lb.classList.remove('open'); });
-  lb.addEventListener('click', function(ev) { if (ev.target === lb) lb.classList.remove('open'); });
-  document.addEventListener('keydown', function(ev) { if (ev.key === 'Escape') lb.classList.remove('open'); });
-}
-fetch('photos.json?r=' + Math.floor(Date.now() / 3600000))
-  .then(function(r) { return r.json(); })
-  .then(afficher)
-  .catch(function() { document.getElementById('galerie').innerHTML = '<div class="ph-empty">📸 Les photos arrivent bientôt !</div>'; });
-</script>
+<script src="js/photos.js"></script>
 
 <footer>
   Volley Biesheim — club affilié à la FFVB • Hall des Sports de Biesheim (Haut-Rhin)<br/>
@@ -186,7 +148,8 @@ fetch('photos.json?r=' + Math.floor(Date.now() / 3600000))
 </footer>
 <nav class="tabbar">
   <a class="tab " href="index.html"
-><span class="ic">🏠</span>Accueil</a>
+><span class="ic">🏠
+</span>Accueil</a>
   <a class="t
 ab " href="club.html"><span class="ic">🏛️</span>Le club</a>
   <a class="tab active" href="photos.html"><span class="ic">📷</span>Photos</a>
