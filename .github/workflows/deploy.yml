@@ -28,6 +28,34 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+
+      - name: Générer actus.json depuis les fichiers actus/*.txt
+        run: |
+          node -e '
+          const fs = require("fs");
+          const dir = "actus";
+          const out = [];
+          for (const f of fs.readdirSync(dir)) {
+            if (!/\.txt$/i.test(f)) continue;
+            const txt = fs.readFileSync(dir + "/" + f, "utf8").trim();
+            if (!txt) continue;
+            const lignes = txt.split("\n");
+            const m = f.match(/^(\d{4})-(\d{2})-(\d{2})/);
+            const titre = f.replace(/\.txt$/i, "").replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/[-_]+/g, " ");
+            let categorie = "";
+            let texte = txt;
+            if (lignes.length > 1 && lignes[0].trim().length > 0 && lignes[0].length < 60) {
+              categorie = lignes[0].trim();
+              texte = lignes.slice(1).join("\n").trim();
+            }
+            out.push({ titre: titre, categorie: categorie, texte: texte,
+              date: m ? m[0] : null, jour: m ? parseInt(m[3],10) : null, mois: m ? parseInt(m[2],10) : null });
+          }
+          out.sort((a,b) => (b.date||"").localeCompare(a.date||""));
+          fs.writeFileSync("actus.json", JSON.stringify(out));
+          console.log("actus.json genere : " + out.length + " actus");
+          '
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

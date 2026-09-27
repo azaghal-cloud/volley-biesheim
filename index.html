@@ -22,6 +22,7 @@
 .hero > * { position:relative; max-width:1100px; margin:0 auto; }
 .bandeau { text-align:center; padding:14px 0 10px; }
 .bandeau-img { width:100%; max-width:560px; dis
+
 play:block; margin:0 auto; height:auto; }
 .btitle { font-size:22px; font-weight:900; letter-spacing:3px; margin:0 0 8px; }
 .chevron { width:36px; height:20px; margin:0 auto; display:block; }
@@ -48,7 +49,8 @@ h2 .dot { width:8px; height:8px; background:#f59e0b; border-radius:50%; }
 .cal { border:1px solid #e2e8f0; border-radius:14px; overflow:hidden; }
 .crow { display:flex; justify-content:space-between; gap:8px; padding:11px 14px; font-size:13px; border-bottom:1px solid #f1f5f9; }
 .crow:last-child { border:none; }
-.crow.domicile { back
+.crow.domicile { bac
+k
 ground:#f0fdf4; }
 .badge { font-size:10px; font-weight:800; padding:3px 8px; border-radius:999px; }
 .badge.dom { background:#dcfce7; color:#166534; }
@@ -75,7 +77,8 @@ table.tarifs td.prix { text-align:right; font-weight:800; color:#003366; white-s
 .pole div { background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:10px 12px; font-size:13px; }
 .pole b { color:#003366; display:block; }
 .pole span { font-size:11px; color:#64748b; }
-@media (min-width:640px) { .hero { padding:0 24px 30px; } .hero h1 { font-size:26px; } .btitle { font-size:28px
+@media (min-width:640px) { .hero { padding:0 24px 30px; } .hero h1 { font-size:26px; } .btitle { font-size:28
+px
 ; letter-spacing:5px; } .news { flex-direction:row; flex-wrap:wrap; } .nitem { flex:1 1 45%; flex-direction:column; gap:8px; } .ndate { align-self:flex-start; } .teams, .pole { grid-template-columns:repeat(3,1fr); } }
 @media (min-width:960px) { .top nav { display:flex; } .hero { padding:0 32px 34px; } .btitle { font-size:36px; letter-spacing:7px; padding-top:8px; } .chevron { width:56px; height:30px; } .hero h1 { font-size:30px; margin:12px 0 10px; max-width:60%; } .hero p { max-width:55%; } .hero-btns { max-width:420px; } section { padding:26px 32px 6px; } h2 { font-size:18px; } .tabbar { display:none; } footer { padding-bottom:30px; } .pole { grid-template-columns:repeat(4,1fr); } }
 </style>
@@ -110,7 +113,8 @@ table.tarifs td.prix { text-align:right; font-weight:800; color:#003366; white-s
 
 <section id="actus">
   <h2><span class="dot"></span>Dernières actus</h2>
-  <div class="news" id="news-list">
+  <di
+v class="news" id="news-list">
     <div class="ni
 tem"><div class="ndate"><b>—</b><span>Club</span></div><div><h3>Chargement des actus…</h3></div></div>
   </div>
@@ -148,7 +152,8 @@ tem"><div class="ndate"><b>—</b><span>Club</span></div><div><h3>Chargement des
 </section>
 
 <footer>
-  Volley Biesheim — club affilié à la FFVB • Hall des Sports de Biesheim (Haut-Rhin
+  Volley Biesheim — club affilié 
+à la FFVB • Hall des Sports de Biesheim (Haut-Rhin
 )<br/>
   Suivez-nous sur <a href="https://www.facebook.com/VolleyBiesheim" target="_blank" rel="noopener">Facebook</a>
 </footer>
@@ -162,9 +167,6 @@ tem"><div class="ndate"><b>—</b><span>Club</span></div><div><h3>Chargement des
 <script>
 var MOIS = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
 function moisAbrev(n) { return MOIS[n - 1].slice(0, 4) + "."; }
-function titreDepuisNom(nom) {
-  return nom.replace(/\.txt$/i, "").replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/[-_]+/g, " ");
-}
 function esc(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
@@ -173,51 +175,26 @@ function carte(actu) {
   if (actu.date) {
     dateHtml = '<div class="ndate"><b>' + actu.jour + '</b><span>' + moisAbrev(actu.mois) + '</span></div>';
   } else {
-    dateHtml = '<div class="ndate"><b>—</b><span>' + (actu.categorie || "Club") + '</span></div>';
+    dateHtml = '<div class="ndate"><b>—</b><span>' + esc(actu.categorie || "Club") + '</span></div>';
   }
   var catHtml = actu.categorie ? '<time>' + esc(actu.categorie) + '</time>' : "";
   var corps = actu.texte.split(/\n\s*\n/).map(function(p) { return "<p>" + esc(p.trim()) + "</p>"; }).join("");
   return '<article class="nitem">' + dateHtml + '<div><h3>' + esc(actu.titre) + '</h3>' + catHtml + corps + '</div></article>';
 }
-function afficher(fichiers) {
+function afficherActus(actus) {
   var liste = document.getElementById("news-list");
-  var actus = (fichiers || []).filter(function(f) { return f.type === "file" && /\.txt$/i.test(f.name); });
-  if (!actus.length) {
+  if (!actus || !actus.length) {
     liste.innerHTML = '<div class="nitem"><div class="ndate"><b>—</b><span>Club</span></div><div><h3>Les actus arrivent bientôt !</h3></div></div>';
     return;
   }
-  // Tri : datées d'abord (plus récentes en premier), non datées ensuite
-  actus.sort(function(a, b) {
-    var da = (a.name.match(/
-^(\d{4})-(\d{2})-(\d{2})/) || [])[0] || "";
-    var db = (b.name.match(/^(\d{4})-(\d{2})-(\d{2})/) || [])[0] || "";
-    return db.localeCompare(da);
-  });
-  var promises = actus.slice(0, 6).map(function(f) {
-    return fetch(f.download_url).then(function(r) { return r.text(); }).then(function(txt) {
-      var lignes = txt.trim().split("\n");
-      var categorie = lignes.length > 1 ? lignes[0].trim() : "";
-      var texte = lignes.length > 1 ? lignes.slice(1).join("\n").trim() : txt.trim();
-      var m = f.name.match(/^(\d{4})-(\d{2})-(\d{2})/);
-      return {
-        titre: titreDepuisNom(f.name),
-        categorie: categorie,
-        texte: texte,
-        date: m ? m[0] : null,
-        jour: m ? parseInt(m[3], 10) : null,
-        mois: m ? parseInt(m[2], 10) : null
-      };
-    });
-  });
-  Promise.all(promises).then(function(resultats) {
-    liste.innerHTML = resultats.map(carte).join("");
-  }).catch(function() {
-    liste.innerHTML = '<div class="nitem"><div class="ndate"><b>—</b><span>Club</span></div><div><h3>Les actus arrivent bientôt !</h3></div></div>';
-  });
+  liste.innerHTML = actus.map(carte).join("");
 }
-fetch("https://api.github.com/repos/azaghal-cloud/volley-biesheim/contents/actus")
-  .then(function(r) { return r.json(); })
-  .then(afficher)
+fetch("actus.json", { cache: "no-cache" })
+  .then(function(r) { if (!r.ok) throw new Error("no actus.json"); return r.json(); })
+  .then(function(actus) {
+    actus.sort(function(a, b) { return (b.date || "").localeCompare(a.date || ""); });
+    afficherActus(actus.slice(0, 6));
+  })
   .catch(function() {
     document.getElementById("news-list").innerHTML = '<div class="nitem"><div class="ndate"><b>—</b><span>Club</span></div><div><h3>Les actus arrivent bientôt !</h3></div></div>';
   });
