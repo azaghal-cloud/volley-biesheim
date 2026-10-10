@@ -2,8 +2,8 @@
 
 Site vitrine du club de volley-ball de Biesheim, hébergé gratuitement sur **GitHub Pages**.
 
-🟣 **URL de test (durant le développement) :** https://azaghal-cloud.github.io/volley-biesheim/
-🟣 **URL finale (une fois le domaine branché) :** https://volley-biesheim.asso.st
+🟣 **URL officielle du site :** https://volley-biesheim.asso.st
+(Ancienne URL de développement : https://azaghal-cloud.github.io/volley-biesheim/ — redirige automatiquement)
 
 ## Les pages du site
 
