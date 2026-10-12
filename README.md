@@ -12,7 +12,7 @@ Site vitrine du club de volley-ball de Biesheim, hébergé gratuitement sur **Gi
 | `index.html` | Accueil : bandeau, actus (auto), aperçu équipes, matchs, contact |
 | `club.html` | Le club : chiffres clés, équipes & horaires, comité, encadrement, partenaires |
 | `photos.html` | Galerie photos auto-alimentée |
-| `contact.html` | Inscriptions : cotisations 2025-2026, documents, contact |
+| `contact.html` | Inscriptions : cotisations 2026-2027, documents, contact |
 | `actus/` | Actualités du club — un fichier texte déposé = une actu affichée automatiquement sur l'accueil |
 | `photos/` | Photos du club — une photo déposée = affichée automatiquement dans la galerie |
 | `ressources/` | Charte graphique du site : logo.png, bandeau.png |
@@ -49,6 +49,15 @@ Exemple : `actus/2025-09-11-reprise-de-la-saison.txt`
 
 ⚠️ Pensez à redimensionner les photos avant envoi (max ~1600px de large) pour
 que le site reste rapide sur mobile.
+
+## Mesure d'audience (statistiques de visites)
+
+Le site utilise [GoatCounter](https://goatcounter.com) pour compter les visites :
+https://volley-biesheim.goatcounter.com
+
+- Le script est présent dans les 5 pages (`<script data-goatcounter=...>` avant `</head>`) — ne pas le supprimer lors d'une modification
+- **Sans cookie**, conforme RGPD : aucun consentement requis, aucune donnée personnelle collectée
+- Les statistiques sont consultables sur https://volley-biesheim.goatcounter.com (connexion requise)
 
 ## Le domaine volley-biesheim.asso.st
 
